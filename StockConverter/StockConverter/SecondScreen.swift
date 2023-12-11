@@ -1,19 +1,17 @@
 //
-//  ViewController.swift
+//  SecondScreen.swift
 //  StockConverter
 //
-//  Created by Kaline Farias on 7/12/23.
+//  Created by Kaline Farias on 8/12/23.
 //
 
 import UIKit
 
-class FirstScreen: UIViewController {
+class SecondScreen: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
         
         let totalValue = UILabel()
         totalValue.translatesAutoresizingMaskIntoConstraints = false
@@ -32,33 +30,6 @@ class FirstScreen: UIViewController {
         
         ])
         
-        let stockQuantity = UILabel()
-        stockQuantity.translatesAutoresizingMaskIntoConstraints = false
-        stockQuantity.text = "Quantidade de stocks:"
-        stockQuantity.numberOfLines = 0
-        view.addSubview(stockQuantity)
-        
-        
-        NSLayoutConstraint.activate([
-            stockQuantity.topAnchor.constraint(equalTo: totalValue.bottomAnchor, constant: 48),
-            stockQuantity.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stockQuantity.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        
-        ])
-        
-        let stockValue = UILabel()
-        stockValue.translatesAutoresizingMaskIntoConstraints = false
-        stockValue.text = "Valor unitário das stocks:"
-        stockValue.numberOfLines = 0
-        view.addSubview(stockValue)
-        
-        NSLayoutConstraint.activate([
-            stockValue.topAnchor.constraint(equalTo: stockQuantity.bottomAnchor, constant: 20),
-            stockValue.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stockValue.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        
-        ])
-        
         let currencyExchangeRate = UILabel()
         currencyExchangeRate.translatesAutoresizingMaskIntoConstraints = false
         currencyExchangeRate.text = "GBP exchange rate:"
@@ -66,7 +37,7 @@ class FirstScreen: UIViewController {
         view.addSubview(currencyExchangeRate)
         
         NSLayoutConstraint.activate([
-            currencyExchangeRate.topAnchor.constraint(equalTo: stockValue.bottomAnchor, constant: 20),
+            currencyExchangeRate.topAnchor.constraint(equalTo: totalValue.bottomAnchor, constant: 48),
             currencyExchangeRate.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             currencyExchangeRate.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         
@@ -85,26 +56,44 @@ class FirstScreen: UIViewController {
         
         ])
         
+        let stockQuantityInput = UITextField()
+        stockQuantityInput.translatesAutoresizingMaskIntoConstraints = false
+        stockQuantityInput.borderStyle = .roundedRect
+        stockQuantityInput.placeholder = "Teste"
+        view.addSubview(stockQuantityInput)
+        
+        NSLayoutConstraint.activate([
+            stockQuantityInput.topAnchor.constraint(equalTo: countryTax.bottomAnchor, constant: 20),
+            stockQuantityInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stockQuantityInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+        
+        let stockValueInput = UITextField()
+        stockValueInput.translatesAutoresizingMaskIntoConstraints = false
+        stockValueInput.borderStyle = .roundedRect
+        stockValueInput.placeholder = "Teste"
+        view.addSubview(stockValueInput)
+        
+        NSLayoutConstraint.activate([
+            stockValueInput.topAnchor.constraint(equalTo: stockQuantityInput.bottomAnchor, constant: 20),
+            stockValueInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stockValueInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+        
         let simulatorButton = UIButton()
         view.addSubview(simulatorButton)
         simulatorButton.translatesAutoresizingMaskIntoConstraints = false
         simulatorButton.configuration = .filled()
         simulatorButton.configuration?.baseBackgroundColor = .systemMint
-        simulatorButton.configuration?.title = "Go to simulation"
-        simulatorButton.addTarget(self, action: #selector(goToNextScreen), for: .touchUpInside)
+        simulatorButton.configuration?.title = "Simulate now!"
         
         NSLayoutConstraint.activate([
             simulatorButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             simulatorButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            simulatorButton.topAnchor.constraint(equalTo: countryTax.bottomAnchor, constant: 48)
+            simulatorButton.topAnchor.constraint(equalTo: stockValueInput.bottomAnchor, constant: 48)
             
         ])
-    }
-    @objc func goToNextScreen() {
-        let nextScreen = SecondScreen()
-        nextScreen.title = "Simulator"
-        navigationController?.pushViewController(nextScreen, animated: true)
+        
+        
     }
 }
-
-
